@@ -1,0 +1,54 @@
+#bgImage {
+  background-image: url("https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg?cs=srgb&dl=pexels-pixabay-209831.jpg&fm=jpg");
+  background-position: center;
+  background-size: cover;
+}
+#cont1 {
+  background-color: #87ceeb;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+#video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+h4 {
+  color: #ffffff;
+}
+#inputStyl {
+  margin: 5px;
+}
+#btn1 {
+  margin: 5px;
+}
+
+.card-body {
+  border: 2px solid #ffffff;
+}
+
+.card-title {
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 5px;
+}
+
+.card-text {
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  align-content: center;
+}
+
+.col-4 {
+  padding: 10px;
+}
