@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { AgGridReact } from "ag-grid-react";
@@ -75,17 +75,39 @@ const defaultForecastData = {
 const Home = () => {
   const [city, setCity] = useState("");
   const [searchCity, setSearchCity] = useState("");
+  const [initialCity, setInitialCity] = useState("Delhi");
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const geocodeUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+          axios.get(geocodeUrl).then((response) => {
+            setInitialCity(response.data.name);
+          });
+        },
+        () => {
+          // Fallback to a default city if location access is denied
+          setInitialCity("Delhi");
+        }
+      );
+    } else {
+      // Fallback to a default city if geolocation is not supported
+      setInitialCity("Delhi");
+    }
+  }, []);
 
   const { data: weatherData = defaultWeatherData, isLoading: isLoadingWeather } = useQuery({
-    queryKey: ["weather", searchCity],
+    queryKey: ["weather", searchCity || initialCity],
     queryFn: fetchWeather,
-    enabled: !!searchCity,
+    enabled: !!(searchCity || initialCity),
   });
 
   const { data: forecastData = defaultForecastData, isLoading: isLoadingForecast } = useQuery({
-    queryKey: ["forecast", searchCity],
+    queryKey: ["forecast", searchCity || initialCity],
     queryFn: fetchFullMonthForecast,
-    enabled: !!searchCity,
+    enabled: !!(searchCity || initialCity),
   });
 
   const handleSearch = () => {
