@@ -43,17 +43,46 @@ const fetchFullMonthForecast = async ({ queryKey }) => {
   return new Promise((resolve) => setTimeout(() => resolve(mockData), 1000));
 };
 
+const defaultWeatherData = {
+  weather: [{ description: "clear sky" }],
+  main: { temp: 25, temp_min: 20, temp_max: 30, humidity: 80, pressure: 1012 },
+  sys: { sunrise: 1628493000, sunset: 1628540400, country: "IN" },
+  dt: 1628522400,
+};
+
+const defaultForecastData = {
+  list: Array.from({ length: 30 }, (_, i) => ({
+    dt: Math.floor(Date.now() / 1000) + i * 86400,
+    main: {
+      temp: Math.random() * 10 + 25,
+      temp_min: Math.random() * 5 + 20,
+      temp_max: Math.random() * 10 + 30,
+      pressure: Math.random() * 20 + 1012,
+      humidity: Math.random() * 20 + 80,
+    },
+    weather: [
+      {
+        description: "clear sky",
+      },
+    ],
+    sys: {
+      sunrise: Math.floor(Date.now() / 1000) + 6 * 3600,
+      sunset: Math.floor(Date.now() / 1000) + 18 * 3600,
+    },
+  })),
+};
+
 const Home = () => {
   const [city, setCity] = useState("");
   const [searchCity, setSearchCity] = useState("");
 
-  const { data: weatherData, isLoading: isLoadingWeather } = useQuery({
+  const { data: weatherData = defaultWeatherData, isLoading: isLoadingWeather } = useQuery({
     queryKey: ["weather", searchCity],
     queryFn: fetchWeather,
     enabled: !!searchCity,
   });
 
-  const { data: forecastData, isLoading: isLoadingForecast } = useQuery({
+  const { data: forecastData = defaultForecastData, isLoading: isLoadingForecast } = useQuery({
     queryKey: ["forecast", searchCity],
     queryFn: fetchFullMonthForecast,
     enabled: !!searchCity,
