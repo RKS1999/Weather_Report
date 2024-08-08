@@ -88,12 +88,10 @@ const Home = () => {
           });
         },
         () => {
-          // Fallback to a default city if location access is denied
           setInitialCity("Delhi");
         }
       );
     } else {
-      // Fallback to a default city if geolocation is not supported
       setInitialCity("Delhi");
     }
   }, []);
