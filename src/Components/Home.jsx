@@ -96,13 +96,19 @@ const Home = () => {
     }
   }, []);
 
-  const { data: weatherData = defaultWeatherData, isLoading: isLoadingWeather } = useQuery({
+  const {
+    data: weatherData = defaultWeatherData,
+    isLoading: isLoadingWeather,
+  } = useQuery({
     queryKey: ["weather", searchCity || initialCity],
     queryFn: fetchWeather,
     enabled: !!(searchCity || initialCity),
   });
 
-  const { data: forecastData = defaultForecastData, isLoading: isLoadingForecast } = useQuery({
+  const {
+    data: forecastData = defaultForecastData,
+    isLoading: isLoadingForecast,
+  } = useQuery({
     queryKey: ["forecast", searchCity || initialCity],
     queryFn: fetchFullMonthForecast,
     enabled: !!(searchCity || initialCity),
@@ -255,7 +261,9 @@ const Home = () => {
                 </h4>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Description</h5>
+                    <h5 className="card-title" id="headerT">
+                      Description
+                    </h5>
                     <p className="card-text">
                       {weatherData.weather[0].description}
                     </p>
@@ -263,31 +271,41 @@ const Home = () => {
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Temperature</h5>
+                    <h5 className="card-title" id="headerT">
+                      Temperature
+                    </h5>
                     <p className="card-text">{weatherData.main.temp} °C</p>
                   </div>
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Max Temperature</h5>
+                    <h5 className="card-title" id="headerT">
+                      Max Temperature
+                    </h5>
                     <p className="card-text">{weatherData.main.temp_max} °C</p>
                   </div>
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Min Temperature</h5>
+                    <h5 className="card-title" id="headerT">
+                      Min Temperature
+                    </h5>
                     <p className="card-text">{weatherData.main.temp_min} °C</p>
                   </div>
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Humidity</h5>
+                    <h5 className="card-title" id="headerT">
+                      Humidity
+                    </h5>
                     <p className="card-text">{weatherData.main.humidity}%</p>
                   </div>
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Sunrise</h5>
+                    <h5 className="card-title" id="headerT">
+                      Sunrise
+                    </h5>
                     <p className="card-text">
                       {new Date(
                         weatherData.sys.sunrise * 1000
@@ -297,7 +315,9 @@ const Home = () => {
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Sunset</h5>
+                    <h5 className="card-title" id="headerT">
+                      Sunset
+                    </h5>
                     <p className="card-text">
                       {new Date(
                         weatherData.sys.sunset * 1000
@@ -307,13 +327,17 @@ const Home = () => {
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Country</h5>
+                    <h5 className="card-title" id="headerT">
+                      Country
+                    </h5>
                     <p className="card-text">{weatherData.sys.country}</p>
                   </div>
                 </div>
                 <div className="col-4">
                   <div className="card-body">
-                    <h5 className="card-title" id="headerT">Pressure</h5>
+                    <h5 className="card-title" id="headerT">
+                      Pressure
+                    </h5>
                     <p className="card-text">{weatherData.main.pressure} hPa</p>
                   </div>
                 </div>
@@ -328,7 +352,9 @@ const Home = () => {
         forecastData && (
           <div className="container-fluid" id="cont1">
             <div className="container">
-              <h4 className="text-center" id="headerT">Monthly Forecast</h4>
+              <h4 className="text-center" id="headerT">
+                Monthly Forecast
+              </h4>
               <div
                 className="ag-theme-alpine"
                 id="ag-grid-id"
